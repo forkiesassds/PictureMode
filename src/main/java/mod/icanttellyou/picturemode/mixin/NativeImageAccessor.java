@@ -7,7 +7,9 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(NativeImage.class)
 public interface NativeImageAccessor {
-    @Accessor("pixels")
+    //? if <1.21.5 {
+    /^@Accessor("pixels")
     long getPixels();
+    ^///? }
 }
 *///? }

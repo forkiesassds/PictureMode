@@ -1,7 +1,7 @@
 package mod.icanttellyou.picturemode.client.image.format;
 
 import com.mojang.blaze3d.platform.NativeImage;
-import mod.icanttellyou.picturemode.client.image.ImageWriteCallback;
+import mod.icanttellyou.picturemode.client.image.*;
 import org.lwjgl.stb.STBImage;
 import org.lwjgl.stb.STBImageWrite;
 
@@ -37,8 +37,8 @@ public class PNGFormat implements NativeImageFormat {
                 //? if >=1.21.5 {
                 image.getPointer(),
                 //? } else {
-                /*((mod.icanttellyou.picturemode.mixin.NativeImageAccessor) (Object) image).getPixels(),
-                *///? }
+                //((mod.icanttellyou.picturemode.mixin.NativeImageAccessor) (Object) image).getPixels(),
+                //? }
                 0
             );
 

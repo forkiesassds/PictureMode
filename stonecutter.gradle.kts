@@ -1,4 +1,4 @@
-import dev.kikugie.stitcher.transformer.impl.LineCommentStrategy
+import dev.kikugie.stitcher.transformer.edit.impl.LineCommentingStrategy
 
 plugins {
     id("dev.kikugie.stonecutter")
@@ -110,6 +110,21 @@ stonecutter.parameters {
             replace(".isZZeroToOne()", ".getDeviceInfo().isZZeroToOne()")
             replace(".getMainRenderTarget()", ".gameRenderer.mainRenderTarget()")
         }
+
+        string(eval(current.version, ">=26.3")) {
+            replace("com.mojang.blaze3d.buffers.GpuBuffer", "com.mojang.renderpearl.api.buffers.GpuBuffer")
+            replace("com.mojang.blaze3d.systems.CommandEncoder", "com.mojang.renderpearl.api.commands.CommandEncoder")
+            replace("com.mojang.blaze3d.textures.GpuTexture", "com.mojang.renderpearl.api.textures.GpuTexture")
+            replace("com.mojang.blaze3d.systems.GpuSurface", "com.mojang.renderpearl.api.device.GpuSurface")
+            replace("com/mojang/blaze3d/buffers/GpuBuffer", "com/mojang/renderpearl/api/buffers/GpuBuffer")
+            replace("com/mojang/blaze3d/systems/CommandEncoder", "com/mojang/renderpearl/api/commands/CommandEncoder")
+            replace("com/mojang/blaze3d/textures/GpuTexture", "com/mojang/renderpearl/api/textures/GpuTexture")
+            replace("com/mojang/blaze3d/systems/GpuSurface", "com/mojang/renderpearl/api/device/GpuSurface")
+            replace("org.lwjgl.glfw.GLFW.GLFW_KEY_", "org.lwjgl.sdl.SDLKeycode.SDLK_")
+            //Naively assuming we only have one input and output, and are vectors.
+            replace("in vec", "layout(location = 0) in vec")
+            replace("out vec", "layout(location = 0) out vec")
+        }
     }
 }
 
@@ -117,6 +132,6 @@ stonecutter handlers {
     inherit("yaml", "toml")
     //HACK: VulkanMod does not support block comments in shaders. We need to use a simpler handler.
     configure("fsh", "vsh") {
-        commenter.set(LineCommentStrategy("//"))
+        commenter.set(LineCommentingStrategy("//"))
     }
 }

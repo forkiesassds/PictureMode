@@ -48,6 +48,7 @@ public class ShaderUtil {
         return new ShaderHolder(PictureMode.createId(id));
     }
 
+    //? if <26.3 {
     public static boolean useShaderTransparency() {
         //? if >=26.2 {
         /*Minecraft minecraft = Minecraft.getInstance();
@@ -56,4 +57,5 @@ public class ShaderUtil {
         return Minecraft.useShaderTransparency();
         //? }
     }
+    //? }
 }
