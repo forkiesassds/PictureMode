@@ -30,7 +30,12 @@ fletchingTable {
 }
 
 dependencies {
-    implementation("dev.isxander:yet-another-config-lib:${commonMod.prop("yacl_version")}-neoforge")
+    val fYaclVer = commonMod.propOrNull("yacl_forgelike_version")
+    if (fYaclVer == null) {
+        implementation("dev.isxander:yet-another-config-lib:${commonMod.prop("yacl_version")}-neoforge")
+    } else {
+        compileOnly("dev.isxander:yet-another-config-lib:$fYaclVer-neoforge")
+    }
 }
 
 neoForge {
@@ -65,7 +70,9 @@ tasks.processResources {
         }
     }
 
-    exclude("assets/picturemode/icon.png")
+    if (stonecutter.eval(stonecutter.current.version, "<26.2")) {
+        exclude("assets/picturemode/icon.png")
+    }
 }
 
 publishMods {

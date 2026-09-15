@@ -20,7 +20,12 @@ description = '''
 This mod adds an isometric view of the world dedicated for taking pictures.
 Inspired by the Photo Mode from Better than Adventure!
 '''
+#? if neoforge && >=26.2 {
+#bannerFile = "assets/picturemode/banner.png"
+#iconFile = "assets/picturemode/icon.png"
+#? } else {
 logoFile = "assets/picturemode/banner.png"
+#? }
 
 [[dependencies.picturemode]]
 modId = "${loader}"

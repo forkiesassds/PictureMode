@@ -35,7 +35,12 @@ dependencies {
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0") as Any)
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.0") as Any)
-    modImplementation("dev.isxander:yet-another-config-lib:${commonMod.prop("yacl_version")}-forge")
+    val fYaclVer = commonMod.propOrNull("yacl_forgelike_version")
+    if (fYaclVer == null) {
+        implementation("dev.isxander:yet-another-config-lib:${commonMod.prop("yacl_version")}-forge")
+    } else {
+        compileOnly("dev.isxander:yet-another-config-lib:$fYaclVer-forge")
+    }
 }
 
 mixin {
