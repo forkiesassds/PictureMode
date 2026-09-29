@@ -31,6 +31,9 @@ public abstract class FogRendererMixin {
         DeltaTracker deltaTracker,
         float darkenWorldAmount,
         ClientLevel level,
+        //? if >=26.4
+        //boolean shouldCreateBossFog,
+        //~ if >=26.4 'Vector4f' -> 'FogData'
         CallbackInfoReturnable<Vector4f> cir,
         @Local FogData fogData,
         @Local FogEnvironment fogEnvironment

@@ -125,6 +125,10 @@ stonecutter.parameters {
             replace("in vec", "layout(location = 0) in vec")
             replace("out vec", "layout(location = 0) out vec")
         }
+
+        string(eval(current.version, ">=26.4")) {
+            replace("minecraft:core/screenquad", "minecraft:core/screentriangle")
+        }
     }
 }
 

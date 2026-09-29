@@ -128,6 +128,7 @@ public abstract class GameRendererMixin {
 
     //? if >=1.21.6 {
     @WrapOperation(
+        //~ if >=26.4 'renderLevel' -> 'extractCamera'
         method = "renderLevel",
         at = @At(
             value = "INVOKE",
