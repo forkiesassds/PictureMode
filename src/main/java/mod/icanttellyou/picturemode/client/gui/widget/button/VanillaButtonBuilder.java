@@ -15,6 +15,7 @@ public class VanillaButtonBuilder implements AbstractButtonBuilder<VanillaButton
     private BooleanSupplier toggleSupplier;
 
     public VanillaButtonBuilder(Component text, Button.OnPress onPress) {
+        //~ if >=26.4 'new Button.Builder' -> 'Button.builder'
         this.builder = new Button.Builder(text, button -> {
             if (toggleSupplier != null && !toggleSupplier.getAsBoolean())
                 button.active = false;

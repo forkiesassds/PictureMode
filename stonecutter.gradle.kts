@@ -49,13 +49,15 @@ stonecutter.tasks {
 
 stonecutter.parameters {
     replacements {
-        string("resource_provider") {
-            direction = eval(current.version, "<1.20.5")
+        string(eval(current.version, "<1.20.5"), "resource_provider") {
             replace("ResourceProvider", "ResourceManager")
         }
 
-        string {
-            direction = eval(current.version, "<1.21.2")
+        string(eval(current.version, "<1.20.5")) {
+            replace("Math.clamp(", "net.minecraft.util.Mth.clamp(")
+        }
+
+        string(eval(current.version, "<1.21.2")) {
             replace("getDeltaTracker()", "getTimer()")
             replace("InSampler", "DiffuseSampler")
             replace("InDepthSampler", "DiffuseDepthSampler")
@@ -63,29 +65,24 @@ stonecutter.parameters {
             replace("minecraft:post/", "minecraft:program/")
         }
 
-        string {
-            direction = eval(current.version, "<1.21.6", ">=1.21.2")
+        string(eval(current.version, "<1.21.6", ">=1.21.2")) {
             replace("minecraft:core/screenquad", "minecraft:post/sobel")
         }
 
-        string {
-            direction = eval(current.version, "<1.21.6")
+        string(eval(current.version, "<1.21.6")) {
             replace("\"value\": ", "\"values\": ")
         }
 
-        string {
-            direction = eval(current.version, "<1.21.9")
+        string(eval(current.version, "<1.21.9")) {
             replace("#version 330", "#version 150")
         }
 
-        string {
-            direction = eval(current.version, "<1.21.11")
+        string(eval(current.version, "<1.21.11")) {
             replace("Identifier", "ResourceLocation")
             replace("net.minecraft.util.Util", "net.minecraft.Util")
         }
 
-        string {
-            direction = eval(current.version, ">=26.1")
+        string(eval(current.version, ">=26.1")) {
             replace("net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper", "net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper")
             replace("KeyBindingHelper", "KeyMappingHelper")
             replace("registerKeyBinding", "registerKeyMapping")

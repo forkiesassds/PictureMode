@@ -1,7 +1,6 @@
 package mod.icanttellyou.picturemode.value;
 
 import mod.icanttellyou.picturemode.util.Tickable;
-import net.minecraft.util.Mth;
 
 public record ClampedValue(Value base, double min, double max) implements Value, Tickable {
     /**
@@ -22,7 +21,7 @@ public record ClampedValue(Value base, double min, double max) implements Value,
      */
     @Override
     public void setGoal(double goal, double delta) {
-        base.setGoal(Mth.clamp(goal, min, max), delta);
+        base.setGoal(Math.clamp(goal, min, max), delta);
     }
 
     /**
