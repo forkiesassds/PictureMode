@@ -50,19 +50,45 @@ public abstract class CameraMixin {
     }
 
     //? if >=26.1 {
-    /*@Inject(method = "createProjectionMatrixForCulling", at = @At("HEAD"), cancellable = true)
+    /*@com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation(
+        method = "createCullFrustum",
+        at = @At(
+            value = "NEW",
+            target = "(Lorg/joml/Matrix4fc;Lorg/joml/Matrix4f;)Lnet/minecraft/client/renderer/culling/Frustum;"
+        )
+    )
+    private net.minecraft.client.renderer.culling.Frustum setupPMCullingMatrix(
+        org.joml.Matrix4fc modelView,
+        org.joml.Matrix4f projection,
+        com.llamalad7.mixinextras.injector.wrapoperation.Operation<net.minecraft.client.renderer.culling.Frustum> original
+    ) {
+        org.joml.Matrix4f mat = pm$makeCullingMatrix();
+        return original.call(modelView, mat != null ? mat : projection);
+    }
+    //? if >=26.4 {
+    /^^///? } else {
+    @Inject(method = "createProjectionMatrixForCulling", at = @At("HEAD"), cancellable = true)
     private void setupPMCullingMatrix(org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable<org.joml.Matrix4f> cir) {
+        org.joml.Matrix4f mat = pm$makeCullingMatrix();
+
+        if (mat != null)
+            cir.setReturnValue(mat);
+    }
+    //? }
+
+    @org.spongepowered.asm.mixin.Unique
+    private org.joml.Matrix4f pm$makeCullingMatrix() {
         PictureModeState state = PictureModeClient.getState();
 
         if (state == null || !state.isEnabled())
-            return;
+            return null;
 
         float delta = this.minecraft.getDeltaTracker().getGameTimeDeltaPartialTick(true);
 
         int width = PictureModeClient.getWidth();
         int height = PictureModeClient.getHeight();
 
-        cir.setReturnValue(state.getProjectionMatrix(width, height, this.depthFar, delta));
+        return state.getProjectionMatrix(width, height, this.depthFar, delta);
     }
 
     @com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation(
