@@ -144,26 +144,4 @@ public abstract class GameRendererMixin {
         return state.isEnabled() || original.call(instance);
     }
     //? }
-
-    //? if >=26.1 {
-    /*@WrapOperation(
-        method = "extractOptions",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/Options;getCloudStatus()Lnet/minecraft/client/CloudStatus;"
-        )
-    )
-    private net.minecraft.client.CloudStatus hideCloudsInPM(
-        net.minecraft.client.Options instance,
-        Operation<net.minecraft.client.CloudStatus> original
-    ) {
-        PictureModeState state = PictureModeClient.getState();
-
-        if (state != null && state.isEnabled()) {
-            return net.minecraft.client.CloudStatus.OFF;
-        }
-
-        return original.call(instance);
-    }
-    *///? }
 }

@@ -33,21 +33,21 @@ pluginManagement {
         gradlePluginPortal()
     }
 
-    val loom_version: String by extra
-    val mdg_version: String by extra
-    val stonecutter_version: String by extra
+    val loomVer = extra["loom_version"] as String
+    val mdgVer = extra["mdg_version"] as String
+    val stonecutterVer = extra["stonecutter_version"] as String
     resolutionStrategy {
         eachPlugin {
             if (requested.id.id.startsWith("net.fabricmc.fabric-loom")) {
-                useVersion(loom_version)
+                useVersion(loomVer)
             }
 
             if (requested.id.id.startsWith("net.neoforged.moddev")) {
-                useVersion(mdg_version)
+                useVersion(mdgVer)
             }
 
             if (requested.id.id == "dev.kikugie.stonecutter") {
-                useVersion(stonecutter_version)
+                useVersion(stonecutterVer)
             }
         }
     }

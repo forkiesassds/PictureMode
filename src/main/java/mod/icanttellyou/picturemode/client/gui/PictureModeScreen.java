@@ -74,7 +74,10 @@ public class PictureModeScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+    public void render(GuiGraphics graphics /*? <26.4 {*/, int mouseX, int mouseY, float partialTick/*? }*/) {
+        //? if >=26.4
+        //float partialTick = graphics.partialTicks();
+
         if (PictureModeClient.getScreenshotHandler().getStatus() != ScreenshotHandler.Status.IDLE)
             return;
 
@@ -87,11 +90,11 @@ public class PictureModeScreen extends Screen {
             (pmState.cameraPanX.getValue(partialTick) != 0.0D || pmState.cameraPanY.getValue(partialTick) != 0.0D) &&
                     (pmState.cameraPanX.getGoal() != 0.0D || pmState.cameraPanY.getGoal() != 0.0D);
 
-        super.render(graphics, mouseX, mouseY, partialTick);
+        super.render(graphics /*? <26.4 {*/, mouseX, mouseY, partialTick/*? }*/);
     }
 
     @Override
-    public void renderBackground(GuiGraphics graphics /*? >=1.20.2 {*/, int mouseX, int mouseY, float partialTick/*?}*/) {}
+    public void renderBackground(GuiGraphics graphics /*? >=1.20.2 && <26.4 {*/, int mouseX, int mouseY, float partialTick/*?}*/) {}
 
     @Override
     protected void init() {

@@ -13,14 +13,14 @@ stonecutter.active("1.21.11")
 
 publishMods {
     @Suppress("LocalVariableName")
-    val mod_version: String by extra
+    val modVer = extra["mod_version"] as String
     changelog = rootProject.file("CHANGELOG.md").readText()
     type = STABLE
 
     github {
         accessToken = providers.environmentVariable("_GITHUB_TOKEN")
-        displayName = mod_version
-        version = mod_version
+        displayName = modVer
+        version = modVer
         repository = "forkiesassds/PictureMode"
         tagName = providers.environmentVariable("FORGEJO_REF_NAME")
         commitish = ""
@@ -31,8 +31,8 @@ publishMods {
     forgejo {
         accessToken = providers.environmentVariable("FORGEJO_TOKEN")
         host(uri("https://codeberg.org"))
-        displayName = mod_version
-        version = mod_version
+        displayName = modVer
+        version = modVer
         repository = "icanttellyou/PictureMode"
         tagName = providers.environmentVariable("FORGEJO_REF_NAME")
         commitish = ""

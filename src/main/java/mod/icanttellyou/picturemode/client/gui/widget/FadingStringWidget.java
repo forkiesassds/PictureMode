@@ -102,7 +102,13 @@ public class FadingStringWidget extends AbstractStringWidget implements Tickable
     }
 
     @Override
-    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float deltaTicks) {
+    public void renderWidget(GuiGraphics graphics /*? <26.4 {*/, int mouseX, int mouseY, float deltaTicks/*? }*/) {
+        //? if >=26.4 {
+        /*int mouseX = graphics.mouseX();
+        int mouseY = graphics.mouseY();
+        float deltaTicks = graphics.partialTicks();
+        *///? }
+
         double fade = this.alphaFade.getValue(deltaTicks);
         if (fade == 0.0D) {
             this.visible = false;
@@ -120,7 +126,7 @@ public class FadingStringWidget extends AbstractStringWidget implements Tickable
 
         //? if >=1.21.11 {
         this.alpha = (float) fade;
-        super.renderWidget(graphics, mouseX, mouseY, deltaTicks);
+        super.renderWidget(graphics /*? <26.4 {*/, mouseX, mouseY, deltaTicks/*? }*/);
         //? } else {
         //this.renderText(graphics, fade);
         //? }
